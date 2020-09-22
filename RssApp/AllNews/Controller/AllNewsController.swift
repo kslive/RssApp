@@ -32,7 +32,6 @@ class AllNewsController: UIViewController {
     
     // MARK: Help function
     
-    
     func configureTableView() {
         
         view.addSubview(tableView)
@@ -59,7 +58,7 @@ class AllNewsController: UIViewController {
     
     @objc func handleRefresh(_ refreshControl: UIRefreshControl) {
         
-        let newNews = News(nameNewsTitle: "New News", dateNewsTitle: "01:00")
+        let newNews = News(nameNewsTitle: "News from Refresh", dateNewsTitle: "01:00")
         allNews.append(newNews)
         
         tableView.reloadData()
@@ -70,10 +69,17 @@ class AllNewsController: UIViewController {
         
         let alert = UIAlertController(title: "Enter Source (URL) with RSS", message: nil, preferredStyle: .alert)
         
-        let okAction = UIAlertAction(title: "Add", style: .default, handler: nil)
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        let okAction = UIAlertAction(title: "Add", style: .default) { [weak self] _ in
+            
+            let newNews = News(nameNewsTitle: "News from URL", dateNewsTitle: "02:00")
+            self?.allNews.append(newNews)
+            
+            self?.tableView.reloadData()
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
         
         alert.addTextField { textField in
+            
             textField.placeholder = "Enter URL"
         }
         alert.addAction(okAction)
