@@ -11,4 +11,5 @@ struct News {
     
     var nameNewsTitle: String
     var dateNewsTitle: String
+    var contentNews: String
 }
