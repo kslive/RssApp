@@ -45,9 +45,9 @@ class ContentsCell: UITableViewCell {
         nameNewsTitle.trailingAnchor.constraint(equalTo: trailingAnchor, constant: constraint).isActive = true
         
         dateNewsTitle.translatesAutoresizingMaskIntoConstraints = false
-        dateNewsTitle.topAnchor.constraint(equalTo: topAnchor, constant: nameNewsTitle.frame.height + 30).isActive = true
         dateNewsTitle.leadingAnchor.constraint(equalTo: leadingAnchor, constant: constraint).isActive = true
         dateNewsTitle.trailingAnchor.constraint(equalTo: trailingAnchor, constant: constraint).isActive = true
+        dateNewsTitle.bottomAnchor.constraint(equalTo: bottomAnchor, constant: constraint - 10).isActive = true
     }
     
     func configure(for model: News) {

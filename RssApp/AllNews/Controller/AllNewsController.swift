@@ -26,8 +26,8 @@ class AllNewsController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = "News"
         configureTableView()
+        configureNavigationController()
     }
     
     // MARK: Help function
@@ -44,6 +44,13 @@ class AllNewsController: UIViewController {
         tableView.addSubview(refreshControl)
     }
     
+    func configureNavigationController() {
+        
+        title = "News"
+        
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Add", style: .plain, target: self, action: #selector(addSource))
+    }
+    
     func setTableViewDelegates() {
         
         tableView.delegate = self
@@ -57,6 +64,22 @@ class AllNewsController: UIViewController {
         
         tableView.reloadData()
         refreshControl.endRefreshing()
+    }
+    
+    @objc func addSource() {
+        
+        let alert = UIAlertController(title: "Enter Source (URL) with RSS", message: nil, preferredStyle: .alert)
+        
+        let okAction = UIAlertAction(title: "Add", style: .default, handler: nil)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        
+        alert.addTextField { textField in
+            textField.placeholder = "Enter URL"
+        }
+        alert.addAction(okAction)
+        alert.addAction(cancelAction)
+        
+        present(alert, animated: true)
     }
 }
 
