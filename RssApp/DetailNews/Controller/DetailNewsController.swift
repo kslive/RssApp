@@ -9,8 +9,8 @@ import UIKit
 
 class DetailNewsController: UIViewController {
     
-    var tableView = UITableView()
-    var allNews: News?
+    private var tableView = UITableView()
+    private var allNews: News?
         
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,7 +21,7 @@ class DetailNewsController: UIViewController {
     
     // MARK: Help function
     
-    func configureTableView() {
+    private func configureTableView() {
         
         view.addSubview(tableView)
         setTableViewDelegates()
@@ -30,7 +30,7 @@ class DetailNewsController: UIViewController {
         tableView.pin(to: view)
     }
     
-    func setTableViewDelegates() {
+    private func setTableViewDelegates() {
         
         tableView.delegate = self
         tableView.dataSource = self

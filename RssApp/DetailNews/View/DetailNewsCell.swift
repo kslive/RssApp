@@ -9,9 +9,9 @@ import UIKit
 
 class DetailNewsCell: UITableViewCell {
     
-    let constraint: CGFloat = 5
-    var nameNewsTitle = UILabel()
-    var dateNewsTitle = UILabel()
+    private let constraint: CGFloat = 5
+    private var nameNewsTitle = UILabel()
+    private var dateNewsTitle = UILabel()
     var contentNewsTitle = UILabel()
     var titleNameAndDate: News! {
         didSet {
@@ -37,7 +37,7 @@ class DetailNewsCell: UITableViewCell {
     }
     // MARK: Help function
     
-    func configureTitles() {
+    private func configureTitles() {
         
         nameNewsTitle.numberOfLines = 0
         nameNewsTitle.font = .boldSystemFont(ofSize: 20)
@@ -50,7 +50,7 @@ class DetailNewsCell: UITableViewCell {
         contentNewsTitle.adjustsFontSizeToFitWidth = true
     }
     
-    func setTitlesConstraints() {
+    private func setTitlesConstraints() {
         
         nameNewsTitle.translatesAutoresizingMaskIntoConstraints = false
         nameNewsTitle.topAnchor.constraint(equalTo: topAnchor, constant: constraint).isActive = true

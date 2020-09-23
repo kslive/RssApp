@@ -11,6 +11,7 @@ class AllNewsController: UIViewController {
     
     private var tableView = UITableView()
     private var allNews: [News]?
+    private var url = "https://www.finam.ru/net/analysis/conews/rsspoint"
     // pull to refresh
     lazy var refreshControl: UIRefreshControl = {
         
@@ -25,7 +26,8 @@ class AllNewsController: UIViewController {
         
         configureTableView()
         configureNavigationController()
-        fetchData()
+        
+        fetchData(url: url)
     }
     
     
@@ -55,10 +57,12 @@ class AllNewsController: UIViewController {
         tableView.dataSource = self
     }
     
-    private func fetchData() {
+    private func fetchData(url: String) {
         
         let newsParser = NewsParser()
-        newsParser.parseNews(url: "https://www.finam.ru/net/analysis/conews/rsspoint") { [weak self] allNews in
+        
+        
+        newsParser.parseNews(url: url) { [weak self] allNews in
             
             self?.allNews = allNews
             
@@ -70,7 +74,7 @@ class AllNewsController: UIViewController {
     
     @objc private func handleRefresh(_ refreshControl: UIRefreshControl) {
         
-        fetchData()
+        fetchData(url: url)
         
         tableView.reloadData()
         refreshControl.endRefreshing()
@@ -82,8 +86,10 @@ class AllNewsController: UIViewController {
         
         let okAction = UIAlertAction(title: "Add", style: .default) { [weak self] _ in
             
-            // TODO
+            guard let url = alert.textFields?.first?.text, !url.isEmpty else { return }
             
+            self?.url = url
+            self?.fetchData(url: url)
             self?.tableView.reloadData()
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
