@@ -57,7 +57,7 @@ extension DetailNewsController: UITableViewDataSource, UITableViewDelegate {
             cell.nameNewsTitle.text = allNews?.nameNewsTitle
             cell.dateNewsTitle.text = allNews?.dateNewsTitle
             
-            tableView.rowHeight = 60
+            tableView.rowHeight = 100
         } else {
             
             cell.contentNewsTitle.text = allNews?.contentNews

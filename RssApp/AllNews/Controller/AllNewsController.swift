@@ -63,14 +63,14 @@ class AllNewsController: UIViewController {
             self?.allNews = allNews
             
             OperationQueue.main.addOperation {
-                self?.tableView.reloadSections(IndexSet(integer: 0), with: .left)
+                self?.tableView.reloadSections(IndexSet(integer: 0), with: .bottom)
             }
         }
     }
     
     @objc private func handleRefresh(_ refreshControl: UIRefreshControl) {
         
-        // TODO
+        fetchData()
         
         tableView.reloadData()
         refreshControl.endRefreshing()
