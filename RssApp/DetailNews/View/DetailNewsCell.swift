@@ -13,6 +13,13 @@ class DetailNewsCell: UITableViewCell {
     var nameNewsTitle = UILabel()
     var dateNewsTitle = UILabel()
     var contentNewsTitle = UILabel()
+    var titleNameAndDate: News! {
+        didSet {
+            
+            nameNewsTitle.text = titleNameAndDate.nameNewsTitle
+            dateNewsTitle.text = titleNameAndDate.dateNewsTitle
+        }
+    }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)

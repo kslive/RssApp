@@ -52,17 +52,19 @@ extension DetailNewsController: UITableViewDataSource, UITableViewDelegate {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "DetailNewsCell", for: indexPath) as! DetailNewsCell
         
-        if indexPath.row == 0 {
+        if let allNews = allNews {
             
-            cell.nameNewsTitle.text = allNews?.nameNewsTitle
-            cell.dateNewsTitle.text = allNews?.dateNewsTitle
-            
-            tableView.rowHeight = 100
-        } else {
-            
-            cell.contentNewsTitle.text = allNews?.contentNews
-            
-            tableView.rowHeight = 1700
+            if indexPath.row == 0 {
+                
+                cell.titleNameAndDate = allNews
+                
+                tableView.rowHeight = 110
+            } else {
+                
+                cell.contentNewsTitle.text = allNews.contentNews
+                
+                tableView.rowHeight = 1700
+            }
         }
         
         return cell
