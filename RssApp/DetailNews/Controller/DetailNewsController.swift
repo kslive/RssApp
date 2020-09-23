@@ -57,16 +57,20 @@ extension DetailNewsController: UITableViewDataSource, UITableViewDelegate {
             if indexPath.row == 0 {
                 
                 cell.titleNameAndDate = allNews
-                
-                tableView.rowHeight = 110
             } else {
                 
                 cell.contentNewsTitle.text = allNews.contentNews
-                
-                tableView.rowHeight = 1700
             }
         }
-        
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        if indexPath.row == 0{
+            return 110
+        } else {
+            return UITableView.automaticDimension
+        }
     }
 }

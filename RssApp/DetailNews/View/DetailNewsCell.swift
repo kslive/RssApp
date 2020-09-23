@@ -63,8 +63,9 @@ class DetailNewsCell: UITableViewCell {
         dateNewsTitle.bottomAnchor.constraint(equalTo: bottomAnchor, constant: constraint - 10).isActive = true
         
         contentNewsTitle.translatesAutoresizingMaskIntoConstraints = false
+//        contentNewsTitle.topAnchor.constraint(equalTo: topAnchor, constant: constraint).isActive = true
         contentNewsTitle.leadingAnchor.constraint(equalTo: leadingAnchor, constant: constraint).isActive = true
         contentNewsTitle.trailingAnchor.constraint(equalTo: trailingAnchor, constant: constraint).isActive = true
-        contentNewsTitle.topAnchor.constraint(equalTo: topAnchor, constant: constraint).isActive = true
+        contentNewsTitle.heightAnchor.constraint(equalTo: heightAnchor, constant: UITableView.automaticDimension).isActive = true
     }
 }
