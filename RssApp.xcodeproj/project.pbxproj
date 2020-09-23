@@ -64,9 +64,9 @@
 		6BB708CE251A1F590035CFC6 /* RssApp */ = {
 			isa = PBXGroup;
 			children = (
+				6BFE61D0251B6DF000B2DE97 /* Application */,
 				6BB70900251A58580035CFC6 /* DetailNews */,
 				6BB708ED251A235D0035CFC6 /* AllNews */,
-				6BB708FC251A481A0035CFC6 /* Model */,
 				6BB708F7251A388C0035CFC6 /* Extensions-Utilites */,
 				6BB708F9251A39CD0035CFC6 /* Supporting */,
 			);
@@ -109,9 +109,6 @@
 		6BB708F9251A39CD0035CFC6 /* Supporting */ = {
 			isa = PBXGroup;
 			children = (
-				6BB708CF251A1F590035CFC6 /* AppDelegate.swift */,
-				6BB708D1251A1F590035CFC6 /* SceneDelegate.swift */,
-				6BB708DA251A1F5B0035CFC6 /* LaunchScreen.storyboard */,
 				6BB708D8251A1F5B0035CFC6 /* Assets.xcassets */,
 				6BB708DD251A1F5B0035CFC6 /* Info.plist */,
 			);
@@ -147,6 +144,33 @@
 			isa = PBXGroup;
 			children = (
 				6BB70908251A5E460035CFC6 /* DetailNewsCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		6BFE61D0251B6DF000B2DE97 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				6BB708FC251A481A0035CFC6 /* Model */,
+				6BFE61D3251B6E2300B2DE97 /* View */,
+				6BFE61D1251B6DFE00B2DE97 /* Controller */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		6BFE61D1251B6DFE00B2DE97 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				6BB708CF251A1F590035CFC6 /* AppDelegate.swift */,
+				6BB708D1251A1F590035CFC6 /* SceneDelegate.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		6BFE61D3251B6E2300B2DE97 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				6BB708DA251A1F5B0035CFC6 /* LaunchScreen.storyboard */,
 			);
 			path = View;
 			sourceTree = "<group>";
