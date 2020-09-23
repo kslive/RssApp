@@ -12,7 +12,7 @@ import Foundation
 // call back
 class NewsParser: NSObject, XMLParserDelegate {
     
-    private var rssItems = [News]()
+    private var rssNews = [News]()
     // save key
     private var currentElement = ""
     private var currentTitle = "" {
@@ -23,6 +23,7 @@ class NewsParser: NSObject, XMLParserDelegate {
     private var currentDescription = "" {
         didSet {
             currentDescription = currentDescription.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+            currentDescription = currentDescription.description.html2String
         }
     }
     private var currentPubDate = "" {
@@ -36,7 +37,6 @@ class NewsParser: NSObject, XMLParserDelegate {
     func parseNews(url: String, completionHandler: (([News]) -> ())?) {
         
         parserCompletionHandler = completionHandler
-        
         let request = URLRequest(url: URL(string: url)!)
         let urlSession = URLSession.shared
         let task = urlSession.dataTask(with: request) { (data, response, error) in
@@ -84,13 +84,14 @@ class NewsParser: NSObject, XMLParserDelegate {
     func parser(_ parser: XMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
         
         if elementName == "item" {
-            let rssItem = News(nameNewsTitle: currentTitle, dateNewsTitle: currentPubDate, contentNews: currentDescription)
-            self.rssItems.append(rssItem)
+            
+            let rssNews = News(nameNewsTitle: currentTitle, dateNewsTitle: currentPubDate, contentNews: currentDescription)
+            self.rssNews.append(rssNews)
         }
     }
     
     func parserDidEndDocument(_ parser: XMLParser) {
-        parserCompletionHandler?(rssItems)
+        parserCompletionHandler?(rssNews)
     }
     
     func parser(_ parser: XMLParser, parseErrorOccurred parseError: Error) {

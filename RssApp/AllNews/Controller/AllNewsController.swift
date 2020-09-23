@@ -11,7 +11,7 @@ class AllNewsController: UIViewController {
     
     private var tableView = UITableView()
     private var allNews: [News]?
-    private var url = "https://www.finam.ru/net/analysis/conews/rsspoint"
+    private var url = "https://bonds.finam.ru/news/today/rss.asp"
     private let reuseIdentifier = "NewsCell"
     var ddd = [String]()
     // pull to refresh

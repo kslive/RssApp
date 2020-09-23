@@ -62,6 +62,8 @@ extension DetailNewsController: UITableViewDataSource, UITableViewDelegate {
                 
                 cell.contentNewsTitle.text = allNews.contentNews
             }
+            
+            cell.selectionStyle = .none
         }
         return cell
     }

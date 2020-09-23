@@ -29,7 +29,7 @@ class DetailNewsCell: UITableViewCell {
         addSubview(contentNewsTitle)
         
         configureTitles()
-        setTitlesConstraints()
+        setTitlesConstraints()        
     }
     
     required init?(coder: NSCoder) {
@@ -40,7 +40,6 @@ class DetailNewsCell: UITableViewCell {
     private func configureTitles() {
         
         nameNewsTitle.numberOfLines = 0
-        nameNewsTitle.textAlignment = .center
         nameNewsTitle.font = .boldSystemFont(ofSize: 20)
         nameNewsTitle.adjustsFontSizeToFitWidth = true
         
