@@ -46,7 +46,6 @@ class DetailNewsCell: UITableViewCell {
         dateNewsTitle.numberOfLines = 1
         
         contentNewsTitle.numberOfLines = 0
-        contentNewsTitle.font = .italicSystemFont(ofSize: 18)
         contentNewsTitle.adjustsFontSizeToFitWidth = true
     }
     

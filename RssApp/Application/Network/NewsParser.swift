@@ -23,7 +23,6 @@ class NewsParser: NSObject, XMLParserDelegate {
     private var currentDescription = "" {
         didSet {
             currentDescription = currentDescription.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
-            currentDescription = currentDescription.description.html2String
         }
     }
     private var currentPubDate = "" {
@@ -85,7 +84,7 @@ class NewsParser: NSObject, XMLParserDelegate {
         
         if elementName == "item" {
             
-            let rssNews = News(nameNewsTitle: currentTitle, dateNewsTitle: currentPubDate, contentNews: currentDescription)
+            let rssNews = News(nameNewsTitle: currentTitle, dateNewsTitle: currentPubDate, contentNews: currentDescription.description.html2String)
             self.rssNews.append(rssNews)
         }
     }

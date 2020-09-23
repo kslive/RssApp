@@ -13,7 +13,6 @@ class AllNewsController: UIViewController {
     private var allNews: [News]?
     private var url = "https://bonds.finam.ru/news/today/rss.asp"
     private let reuseIdentifier = "NewsCell"
-    var ddd = [String]()
     // pull to refresh
     lazy var refreshControl: UIRefreshControl = {
         
@@ -30,6 +29,12 @@ class AllNewsController: UIViewController {
         configureNavigationController()
         
         fetchData(url: url)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        tableView.reloadData()
     }
     
     // MARK: Help function
@@ -180,6 +185,7 @@ extension AllNewsController: UITableViewDelegate, UITableViewDataSource {
         
         if indexPath == tableView.indexPathForSelectedRow {
             
+            allNews?.remove(at: indexPath.row)
             detailNewsController.modalPresentationStyle = .fullScreen
             navigationController?.pushViewController(detailNewsController, animated: true)
         }
