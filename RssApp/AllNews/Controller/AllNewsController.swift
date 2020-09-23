@@ -9,8 +9,8 @@ import UIKit
 
 class AllNewsController: UIViewController {
     
-    var tableView = UITableView()
-    var allNews = [News]()
+    private var tableView = UITableView()
+    private var allNews: [News]?
     // pull to refresh
     lazy var refreshControl: UIRefreshControl = {
         
@@ -31,7 +31,7 @@ class AllNewsController: UIViewController {
     
     // MARK: Help function
     
-    func configureTableView() {
+    private func configureTableView() {
         
         view.addSubview(tableView)
         setTableViewDelegates()
@@ -42,14 +42,14 @@ class AllNewsController: UIViewController {
         tableView.addSubview(refreshControl)
     }
     
-    func configureNavigationController() {
+    private func configureNavigationController() {
         
         title = "News"
         
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Add", style: .plain, target: self, action: #selector(addSource))
     }
     
-    func setTableViewDelegates() {
+    private func setTableViewDelegates() {
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -58,33 +58,31 @@ class AllNewsController: UIViewController {
     private func fetchData() {
         
         let newsParser = NewsParser()
-        newsParser.parseNews(url: "https://www.finam.ru/net/analysis/conews/rsspoint") { allNews in
+        newsParser.parseNews(url: "https://www.finam.ru/net/analysis/conews/rsspoint") { [weak self] allNews in
             
-            self.allNews = allNews
+            self?.allNews = allNews
             
             OperationQueue.main.addOperation {
-                self.tableView.reloadSections(IndexSet(integer: 0), with: .left)
+                self?.tableView.reloadSections(IndexSet(integer: 0), with: .left)
             }
         }
     }
     
-    @objc func handleRefresh(_ refreshControl: UIRefreshControl) {
+    @objc private func handleRefresh(_ refreshControl: UIRefreshControl) {
         
-        let newNews = News(nameNewsTitle: "News from Refresh", dateNewsTitle: "01:00", contentNews: "News from Refresh News from Refresh News from Refresh")
-        allNews.append(newNews)
+        // TODO
         
         tableView.reloadData()
         refreshControl.endRefreshing()
     }
     
-    @objc func addSource() {
+    @objc private func addSource() {
         
         let alert = UIAlertController(title: "Enter Source (URL) with RSS", message: nil, preferredStyle: .alert)
         
         let okAction = UIAlertAction(title: "Add", style: .default) { [weak self] _ in
             
-            let newNews = News(nameNewsTitle: "News from URL", dateNewsTitle: "02:00", contentNews: "News from URL News from URL News from URL")
-            self?.allNews.append(newNews)
+            // TODO
             
             self?.tableView.reloadData()
         }
@@ -99,7 +97,6 @@ class AllNewsController: UIViewController {
         
         present(alert, animated: true)
     }
-    
 }
 
 // MARK: UITableViewDataSource
@@ -108,15 +105,19 @@ extension AllNewsController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
+        guard let allNews = allNews else { return 0 }
+        
         return allNews.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "NewsCell", for: indexPath) as! ContentsCell
-        let news = allNews[indexPath.row]
         
-        cell.configure(for: news)
+        if let news = allNews?[indexPath.row] {
+            
+            cell.configure(for: news)
+        }
         
         return cell
     }
@@ -124,9 +125,11 @@ extension AllNewsController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         let detailNewsController = DetailNewsController()
-        let news = allNews[indexPath.row]
         
-        detailNewsController.set(news: news)
+        if let news = allNews?[indexPath.row] {
+            
+            detailNewsController.set(news: news)
+        }
         
         if indexPath == tableView.indexPathForSelectedRow {
             
