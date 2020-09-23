@@ -110,6 +110,7 @@
 		6BB708F9251A39CD0035CFC6 /* Supporting */ = {
 			isa = PBXGroup;
 			children = (
+				6BB708D1251A1F590035CFC6 /* SceneDelegate.swift */,
 				6BB708D8251A1F5B0035CFC6 /* Assets.xcassets */,
 				6BB708DD251A1F5B0035CFC6 /* Info.plist */,
 			);
@@ -155,6 +156,7 @@
 				6BB708FC251A481A0035CFC6 /* Model */,
 				6BFE61D3251B6E2300B2DE97 /* View */,
 				6BFE61D1251B6DFE00B2DE97 /* Controller */,
+				6BFE61D4251B6E7000B2DE97 /* Network */,
 				6BFE61D9251B6F4E00B2DE97 /* Service */,
 			);
 			path = Application;
@@ -164,7 +166,6 @@
 			isa = PBXGroup;
 			children = (
 				6BB708CF251A1F590035CFC6 /* AppDelegate.swift */,
-				6BB708D1251A1F590035CFC6 /* SceneDelegate.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -188,7 +189,6 @@
 		6BFE61D9251B6F4E00B2DE97 /* Service */ = {
 			isa = PBXGroup;
 			children = (
-				6BFE61D4251B6E7000B2DE97 /* Network */,
 				6BB708F7251A388C0035CFC6 /* Extensions-Utilites */,
 			);
 			path = Service;

@@ -12,6 +12,8 @@ class AllNewsController: UIViewController {
     private var tableView = UITableView()
     private var allNews: [News]?
     private var url = "https://www.finam.ru/net/analysis/conews/rsspoint"
+    private let reuseIdentifier = "NewsCell"
+    var ddd = [String]()
     // pull to refresh
     lazy var refreshControl: UIRefreshControl = {
         
@@ -30,14 +32,13 @@ class AllNewsController: UIViewController {
         fetchData(url: url)
     }
     
-    
     // MARK: Help function
     
     private func configureTableView() {
         
         view.addSubview(tableView)
         setTableViewDelegates()
-        tableView.rowHeight = 100
+        tableView.rowHeight = 150
         tableView.register(ContentsCell.self, forCellReuseIdentifier: "NewsCell")
         tableView.pin(to: view)
         
@@ -49,6 +50,7 @@ class AllNewsController: UIViewController {
         title = "News"
         
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Add", style: .plain, target: self, action: #selector(addSource))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Chose", style: .plain, target: self, action: #selector(choseSource))
     }
     
     private func setTableViewDelegates() {
@@ -103,6 +105,46 @@ class AllNewsController: UIViewController {
         
         present(alert, animated: true)
     }
+    
+    @objc private func choseSource() {
+        
+        let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        
+        let sourceOne = UIAlertAction(title: "Новости компании, finam.ru", style: .default) { [weak self] _ in
+            
+            
+            let url = "https://www.finam.ru/net/analysis/conews/rsspoint"
+            self?.fetchData(url: url)
+            self?.tableView.reloadData()
+        }
+        let sourceTwo = UIAlertAction(title: "banki.ru", style: .default) { [weak self] _ in
+            
+            let url = "https://www.banki.ru/xml/news.rss"
+            self?.fetchData(url: url)
+            self?.tableView.reloadData()
+        }
+        let sourceThree = UIAlertAction(title: "Новости мировых рынков", style: .default) { [weak self] _ in
+            
+            let url = "https://www.finam.ru/international/advanced/rsspoint"
+            self?.fetchData(url: url)
+            self?.tableView.reloadData()
+        }
+        let sourceFour = UIAlertAction(title: "Облигации: Новости", style: .default) { [weak self] _ in
+            
+            let url = "https://bonds.finam.ru/news/today/rss.asp"
+            self?.fetchData(url: url)
+            self?.tableView.reloadData()
+        }
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel)
+        
+        actionSheet.addAction(sourceOne)
+        actionSheet.addAction(sourceTwo)
+        actionSheet.addAction(sourceThree)
+        actionSheet.addAction(sourceFour)
+        actionSheet.addAction(cancel)
+        
+        present(actionSheet, animated: true)
+    }
 }
 
 // MARK: UITableViewDataSource
@@ -118,13 +160,12 @@ extension AllNewsController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "NewsCell", for: indexPath) as! ContentsCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! ContentsCell
         
         if let news = allNews?[indexPath.row] {
             
             cell.configure(for: news)
         }
-        
         return cell
     }
     

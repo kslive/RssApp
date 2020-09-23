@@ -9,6 +9,7 @@ import UIKit
 
 class DetailNewsController: UIViewController {
     
+    private let reuseIdentifier = "DetailNewsCell"
     private var tableView = UITableView()
     private var allNews: News?
         
@@ -26,7 +27,7 @@ class DetailNewsController: UIViewController {
         view.addSubview(tableView)
         setTableViewDelegates()
         tableView.separatorColor = .clear
-        tableView.register(DetailNewsCell.self, forCellReuseIdentifier: "DetailNewsCell")
+        tableView.register(DetailNewsCell.self, forCellReuseIdentifier: reuseIdentifier)
         tableView.pin(to: view)
     }
     
@@ -50,7 +51,7 @@ extension DetailNewsController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "DetailNewsCell", for: indexPath) as! DetailNewsCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! DetailNewsCell
         
         if let allNews = allNews {
             
@@ -68,7 +69,7 @@ extension DetailNewsController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
         if indexPath.row == 0{
-            return 110
+            return 150
         } else {
             return UITableView.automaticDimension
         }
